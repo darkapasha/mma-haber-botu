@@ -1,0 +1,16 @@
+# gizli ve yerel dosyalar
+.env
+*.env
+!.env.example
+veri/
+data/
+logs/
+venv/
+.venv/
+__pycache__/
+node_modules/
+*.db
+*.sqlite
+*.pem
+anahtar.txt
+esleme.*

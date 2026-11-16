@@ -1,0 +1,27 @@
+# /etc/systemd/system/mma-bot.service
+# Ayarlar /opt/mma-bot/.env dosyasından python-dotenv ile okunur.
+[Unit]
+Description=MMA Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mmabot
+Group=mmabot
+WorkingDirectory=/opt/mma-bot
+Environment=PYTHONUNBUFFERED=1
+Environment=HOME=/opt/mma-bot
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/mma-bot/.playwright
+ExecStart=/opt/mma-bot/.venv/bin/python bot.py
+Restart=always
+RestartSec=10
+TimeoutStopSec=20
+
+# Sertleştirme (Chromium'un çalışabilmesi için "full" yeterli ve güvenli bir seviye)
+NoNewPrivileges=true
+ProtectSystem=full
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
